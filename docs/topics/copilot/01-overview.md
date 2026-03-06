@@ -7,7 +7,6 @@ mode: short
 ---
 
 <!-- TOC start -->
-<!-- TOC start -->
 - [GitHub Copilot](#github-copilot)
   - [🧩 Ý chính](#-ý-chính)
   - [Quickstart — Bắt đầu nhanh](#quickstart--bắt-đầu-nhanh)
@@ -15,8 +14,9 @@ mode: short
   - [⚠️ Lưu ý / Hạn chế](#️-lưu-ý--hạn-chế)
   - [🚀 3 Bước tiếp theo](#-3-bước-tiếp-theo)
   - [🗺️ Sơ đồ — Vòng lặp Agent](#️-sơ-đồ--vòng-lặp-agent)
+  - [⚠️ Best Practices](#️-best-practices)
 <!-- TOC end -->
-<!-- TOC end -->
+
 
 ## GitHub Copilot
 
@@ -89,3 +89,19 @@ graph TD
 ---
 
 🔗 **Tham khảo tiếp theo:** 
+
+### ⚠️ Best Practices
+
+Dưới đây là các thực hành đã được kiểm chứng để sử dụng AI (Copilot) hiệu quả trong VS Code. Nội dung tổng hợp từ tài liệu chính thức và được chắt lọc thành các bước hành động.
+
+- **Tối ưu hoá dự án cho AI:** Thêm file hướng dẫn dự án (custom instructions) và `prompt` tái sử dụng để cung cấp bối cảnh kiến trúc, quy ước mã, và thông tin môi trường mà AI không thể suy ra từ mã nguồn. Sử dụng `/init` để sinh cấu hình cơ bản.
+- **Chọn công cụ phù hợp:** Dùng *inline suggestions* cho hoàn thành nhanh; *Ask/chat* để khám phá; *Inline chat* cho sửa đổi cục bộ; *Agents* cho thay đổi đa-file hoặc tác vụ tự động hóa.
+- **Viết prompt hiệu quả:** Cụ thể hoá đầu vào/đầu ra, kèm ví dụ và tiêu chí kiểm định; chia nhiệm vụ lớn thành bước nhỏ; yêu cầu AI hỏi câu hỏi làm rõ nếu thông tin thiếu.
+- **Cung cấp bối cảnh chính xác:** Trỏ AI tới file/folder/symbol cụ thể bằng `#<file>`/`#<folder>`/`#<symbol>`, hoặc dùng `#fetch`/`#githubRepo` để lấy tài liệu ngoài mã nguồn.
+- **Chọn model phù hợp:** Dùng model nhanh cho boilerplate, model reasoning cho thiết kế/điều tra; ghim model trong prompt hoặc agent khi cần độ nhất quán; thử nghiệm khi cần.
+- **Lập kế hoạch trước khi thực hiện:** Với thay đổi lớn, dùng chế độ *Plan* để soạn bước thực hiện, duyệt kế hoạch, rồi chạy *Agent* để triển khai từng bước; tạo *checkpoints* để có thể quay lại.
+- **Kiểm tra và xác minh kết quả của AI:** Luôn review mã do AI sinh ra; cung cấp unit test trong prompt và chạy test sau khi AI thay đổi mã; kiểm tra các lỗ hổng bảo mật và không đưa thông tin nhạy cảm vào prompt.
+- **Quản lý context và session:** Bắt đầu session mới cho nhiệm vụ không liên quan; xóa lịch sử không cần thiết; dùng subagents hoặc phiên nền để tránh làm rối bối cảnh chính.
+- **Làm việc với codebase lớn:** Sử dụng indexing/remote indexing, chia workspace bằng multi-root, cung cấp hướng dẫn dự án ở mức module, và chạy các phiên song song cho các tác vụ độc lập.
+
+> 📌 **Tóm tắt:** Thiết lập dự án, viết prompt rõ ràng, kiểm tra kỹ đầu ra, và sử dụng model & chế độ phù hợp là các bước then chốt để tận dụng Copilot an toàn và hiệu quả.
