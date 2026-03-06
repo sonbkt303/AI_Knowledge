@@ -7,12 +7,15 @@ mode: short
 ---
 
 <!-- TOC start -->
+<!-- TOC start -->
 - [GitHub Copilot](#github-copilot)
   - [🧩 Ý chính](#-ý-chính)
-  - [💻 Ví dụ — Luồng làm việc cơ bản](#-ví-dụ--luồng-làm-việc-cơ-bản)
+  - [Quickstart — Bắt đầu nhanh](#quickstart--bắt-đầu-nhanh)
+- [Core Concepts — Chi tiết](#core-concepts--chi-tiết)
   - [⚠️ Lưu ý / Hạn chế](#️-lưu-ý--hạn-chế)
   - [🚀 3 Bước tiếp theo](#-3-bước-tiếp-theo)
   - [🗺️ Sơ đồ — Vòng lặp Agent](#️-sơ-đồ--vòng-lặp-agent)
+<!-- TOC end -->
 <!-- TOC end -->
 
 ## GitHub Copilot
@@ -29,7 +32,7 @@ mode: short
 
 > 📌 **Tóm tắt:** Copilot hoạt động theo vòng lặp **Understand → Act → Validate**; bạn luôn kiểm soát bằng cách review diff và approve trước khi áp dụng.
 
-### 💻 Ví dụ — Luồng làm việc cơ bản
+### Quickstart — Bắt đầu nhanh
 
 ```bash
 # 1. Mở Copilot Chat
@@ -48,12 +51,17 @@ Ctrl+I            # mở inline chat ngay trong editor
 
 > 💡 **Giải thích:** Chạy `/init` một lần khi bắt đầu dự án để agent tự sinh file convention — các lần dùng tiếp theo agent sẽ hiểu ngữ cảnh dự án ngay lập tức.
 
+---
+
+## Core Concepts — Chi tiết
+> Những khái niệm nền tảng liên quan đến cách Copilot hoạt động (context, agent loop, kiểm soát, hạn chế).
+
 ### ⚠️ Lưu ý / Hạn chế
 
 - ❌ **Tránh:** tin tưởng output mà không kiểm tra — mã trông hợp lý nhưng có thể dùng API cũ hoặc có lỗi logic; **luôn chạy test**.
 - ⚠️ **Nondeterminism:** cùng một prompt có thể trả về kết quả khác nhau mỗi lần chạy.
 - ⚠️ **Knowledge cutoff:** model bị giới hạn bởi dữ liệu huấn luyện; dùng `#web` để lấy thông tin mới nhất.
-- ❌ **Prompt injection:** file hoặc web content độc hại có thể cố tình thay đổi hành vi agent — VS Code có cơ chế *trust* và *approval* để bảo vệ.
+- ❌ **Prompt injection:** file hoặc web content độc hại có thể cố gắng thay đổi hành vi agent — VS Code có cơ chế *trust* và *approval* để bảo vệ.
 - ⚠️ **Context đầy:** khi context window tràn, dùng `/compact` hoặc mở session mới để duy trì hiệu suất.
 
 ### 🚀 3 Bước tiếp theo
@@ -64,6 +72,8 @@ Ctrl+I            # mở inline chat ngay trong editor
 
 ### 🗺️ Sơ đồ — Vòng lặp Agent
 
+<div style="display:flex; justify-content:center">
+
 ```mermaid
 graph TD
   A["🧠 Hiểu<br/>Đọc file, tìm kiếm<br/>xây dựng ngữ cảnh"] --> B["⚡ Hành động<br/>Sửa code, chạy lệnh"]
@@ -72,8 +82,10 @@ graph TD
   C -- OK --> D["📋 Duyệt, Áp dụng<br/>Duyệt diff, phê duyệt"]
 ```
 
-*Hình 1: Vòng lặp hoạt động của Copilot Agent — Understand → Act → Validate → Review.*
+</div>
+
+<p style="text-align:center"><em>Hình 1: Vòng lặp hoạt động của Copilot Agent — Understand → Act → Validate → Review.</em></p>
 
 ---
 
-> 🔗 **Tham khảo tiếp theo:** 
+🔗 **Tham khảo tiếp theo:** 
