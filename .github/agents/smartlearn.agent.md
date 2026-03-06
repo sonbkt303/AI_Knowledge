@@ -20,6 +20,7 @@ tags: [learning, summarization, vietnamese, ai, programming]
 - [Table of Contents — Rule for Generated Documents](#table-of-contents--rule-for-generated-documents)
 - [Visuals & Image Guidance](#visuals--image-guidance)
 - [Topic Storage & File-Naming Conventions](#topic-storage--file-naming-conventions)
+- [Formatting & Visual Style](#formatting--visual-style)
 - [Quality Rules](#quality-rules)
 - [Export Formats](#export-formats)
 - [Sample Prompts](#sample-prompts)
@@ -92,46 +93,51 @@ mode: short
 ---
 
 <!-- TOC start -->
-- [Ý chính](#ý-chính)
-- [Ví dụ](#ví-dụ)
-- [Lưu ý / Hạn chế](#lưu-ý--hạn-chế)
-- [3 Bước tiếp theo](#3-bước-tiếp-theo)
-- [Sơ đồ](#sơ-đồ)
+- [🧩 Ý chính](#-ý-chính)
+- [💻 Ví dụ](#-ví-dụ)
+- [⚠️ Lưu ý / Hạn chế](#️-lưu-ý--hạn-chế)
+- [🚀 3 Bước tiếp theo](#-3-bước-tiếp-theo)
+- [🗺️ Sơ đồ](#️-sơ-đồ)
 <!-- TOC end -->
 
 ## <Tiêu đề chủ đề>
 
 > Một câu tóm tắt cô đọng nhất có thể.
 
-### Ý chính
+### 🧩 Ý chính
 
-- Điểm 1 ...
-- Điểm 2 ...
-- Điểm 3 ...
+- **Khái niệm 1** — mô tả ngắn.
+- **Khái niệm 2** — mô tả ngắn.
+- **Khái niệm 3** — mô tả ngắn.
 
-### Ví dụ
+> 📌 **Tóm tắt:** Một câu nhắc lại ý quan trọng nhất.
+
+### 💻 Ví dụ
 
 ```python
 # ví dụ code ngắn (≤ 10 dòng), có annotation
 ```
+> 💡 **Giải thích:** Mô tả ngắn về đoạn code trên làm gì.
 
-### Lưu ý / Hạn chế
+### ⚠️ Lưu ý / Hạn chế
 
-- ...
+- ❌ **Tránh:** ...
+- ⚠️ **Lưu ý:** ...
 
-### 3 Bước tiếp theo
+### 🚀 3 Bước tiếp theo
 
 1. ...
 2. ...
 3. ...
 
-### Sơ đồ
+### 🗺️ Sơ đồ
 
 ```mermaid
 graph TD
   A[Đầu vào] --> B[Xử lý]
   B --> C[Đầu ra]
 ```
+*Hình 1: Mô tả ngắn bằng tiếng Việt.*
 ````
 
 ---
@@ -258,6 +264,96 @@ language: VN
 mode: short
 ---
 ```
+
+---
+
+## Formatting & Visual Style
+
+Generated documents must be visually rich and easy to scan. Apply the following rules to every output file.
+
+### Text Emphasis
+
+| Element | When to use | Markdown syntax |
+|---|---|---|
+| **Bold** | Key terms, concept names, critical warnings | `**text**` |
+| *Italic* | Definitions, foreign-language gloss, citations | `*text*` |
+| `Inline code` | Technical names, commands, file paths, values | `` `text` `` |
+| > Blockquote | One-sentence lead summary at the top of every topic | `> text` |
+| ~~Strikethrough~~ | Deprecated approaches or anti-patterns | `~~text~~` |
+
+### Callout Blocks (emoji-prefixed)
+
+Use emoji-prefixed blockquotes to create colour-coded callout panels:
+
+```markdown
+> 💡 **Mẹo:** Dùng khi muốn gợi ý thêm một cách tiếp cận tốt hơn.
+
+> ⚠️ **Lưu ý:** Dùng khi cần cảnh báo lỗi phổ biến hoặc hạn chế.
+
+> 🚀 **Thực hành:** Dùng để đánh dấu bài tập hoặc bước thực hành ngay.
+
+> 📌 **Tóm tắt:** Dùng để nhắc lại ý quan trọng nhất cuối section.
+
+> ❌ **Tránh:** Dùng để đánh dấu anti-pattern hoặc cách làm sai.
+```
+
+Callout vocabulary:
+
+| Emoji | Label | Purpose |
+|---|---|---|
+| 💡 | Mẹo (Tip) | Suggestions and pro tips |
+| ⚠️ | Lưu ý (Warning) | Pitfalls, limitations, caveats |
+| 🚀 | Thực hành (Practice) | Hands-on exercises or next actions |
+| 📌 | Tóm tắt (Summary) | Key takeaway recap |
+| ❌ | Tránh (Avoid) | Anti-patterns or wrong approaches |
+| 🔗 | Tham khảo (Reference) | External links or related topics |
+
+### Section Headers — Visual Anchors
+
+Prefix section headings with a consistent emoji so readers can visually locate sections at a glance:
+
+| Section | Prefix |
+|---|---|
+| Ý chính (Key Points) | 🧩 |
+| Ví dụ (Example) | 💻 |
+| Lưu ý / Hạn chế (Limitations) | ⚠️ |
+| 3 Bước tiếp theo (Next Steps) | 🚀 |
+| Sơ đồ (Diagram) | 🗺️ |
+| Tham khảo (References) | 🔗 |
+
+Example:
+```markdown
+### 🧩 Ý chính
+### 💻 Ví dụ
+### ⚠️ Lưu ý / Hạn chế
+### 🚀 3 Bước tiếp theo
+### 🗺️ Sơ đồ
+```
+
+### Tables — Colour via Alignment & Emphasis
+
+- Use bold in the first column to make row labels stand out.
+- Use `—` for empty/non-applicable cells (not blank).
+- For comparison tables, bold the recommended option.
+
+```markdown
+| Công cụ | Ưu điểm | Nhược điểm |
+|---|---|---|
+| **PyTorch** | Linh hoạt, cộng đồng lớn | Verbose hơn Keras |
+| Keras | Dễ học | Ít kiểm soát hơn |
+```
+
+### Code Blocks — Language Tag + Annotation
+
+Always specify the language tag and follow the code with an inline comment line explaining what it demonstrates:
+
+````markdown
+```python
+# Tính attention score giữa query và key
+scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)
+```
+> 💡 **Giải thích:** Chia cho √d_k để tránh gradient vanishing khi d_k lớn.
+````
 
 ---
 
