@@ -88,8 +88,6 @@ graph TD
 
 ---
 
-🔗 **Tham khảo tiếp theo:** 
-
 ### ⚠️ Best Practices
 
 Dưới đây là các thực hành đã được kiểm chứng để sử dụng AI (Copilot) hiệu quả trong VS Code. Nội dung tổng hợp từ tài liệu chính thức và được chắt lọc thành các bước hành động.
