@@ -21,6 +21,14 @@ mode: short
   - [⚙️ Tùy chỉnh \& cài đặt (Customization \& settings)](#️-tùy-chỉnh--cài-đặt-customization--settings)
   - [💡 Ví dụ thực tế (Actionable example)](#-ví-dụ-thực-tế-actionable-example)
   - [🔗 Tài nguyên (Resources)](#-tài-nguyên-resources-1)
+- [🧠 Bộ nhớ (Memory)](#-bộ-nhớ-memory)
+  - [📊 Hai hệ thống nhớ (Two memory systems)](#-hai-hệ-thống-nhớ-two-memory-systems)
+  - [🗂️ Phạm vi bộ nhớ (Memory scopes)](#️-phạm-vi-bộ-nhớ-memory-scopes)
+  - [💬 Lưu trữ \& truy xuất (Store \& retrieve)](#-lưu-trữ--truy-xuất-store--retrieve)
+  - [🗃️ Quản lý file nhớ (Manage memory files)](#️-quản-lý-file-nhớ-manage-memory-files)
+  - [☁️ Copilot Memory (GitHub-hosted)](#️-copilot-memory-github-hosted)
+  - [✅ Thực hành tốt (Best practices)](#-thực-hành-tốt-best-practices)
+  - [🔗 Tài nguyên (Resources)](#-tài-nguyên-resources-2)
 <!-- TOC end -->
 
 ---
@@ -158,3 +166,107 @@ mode: short
 | Planning guide (official) | <https://code.visualstudio.com/docs/copilot/agents/planning> |
 | Session memory | <https://code.visualstudio.com/docs/copilot/agents/memory> |
 | Custom agents | <https://code.visualstudio.com/docs/copilot/customization/custom-agents> |
+ 
+---
+
+## 🧠 Bộ nhớ (Memory)
+
+> Agents trong VS Code sử dụng bộ nhớ để **lưu giữ ngữ cảnh xuyên suốt các phiên làm việc** — không phải bắt đầu lại từ đầu mỗi phiên. VS Code hỗ trợ hai hệ thống nhớ bổ trợ nhau: **Memory tool** (cục bộ, mặc định bật) và **Copilot Memory** (GitHub-hosted, opt‑in).
+> *(Agents use memory to retain context across sessions — remembering preferences, applying lessons from past tasks, and accumulating codebase knowledge over time.)*
+
+---
+
+### 📊 Hai hệ thống nhớ (Two memory systems)
+
+| Tiêu chí | Memory tool | Copilot Memory |
+|---|---|---|
+| **Nơi lưu trữ** | Trên máy (local) | GitHub-hosted (remote) |
+| **Phạm vi** | User, repository, session | Repository only |
+| **Chia sẻ giữa surfaces** | Không (chỉ VS Code) | Có (coding agent, review, CLI) |
+| **Tạo bởi** | Bạn hoặc agent trong chat | Copilot agents tự động |
+| **Bật mặc định** | ✅ Có | ❌ Không (opt‑in) |
+| **Hết hạn** | Quản lý thủ công | Tự động (~28 ngày) |
+
+---
+
+### 🗂️ Phạm vi bộ nhớ (Memory scopes)
+
+| Phạm vi | Đường dẫn | Tồn tại xuyên phiên | Khi nào dùng |
+|---|---|---|---|
+| **User** | `/memories/` | ✅ Mọi workspace | Sở thích cá nhân, code style |
+| **Repository** | `/memories/repo/` | ✅ Trong workspace | Kiến trúc, convention, lệnh build |
+| **Session** | `/memories/session/` | ❌ Xóa khi kết thúc phiên | Ghi chú tạm thời, kế hoạch đang thực hiện |
+
+> **Lưu ý:** 200 dòng đầu của **User memory** tự động được nạp vào context khi mở mỗi phiên làm việc.
+
+---
+
+### 💬 Lưu trữ & truy xuất (Store & retrieve)
+
+**Lưu bộ nhớ** — yêu cầu agent ghi nhớ bằng ngôn ngữ tự nhiên:
+```
+Remember that our team uses conventional commits for all commit messages
+```
+Agent tự xác định phạm vi phù hợp và tạo/cập nhật file memory tương ứng.
+
+**Truy xuất bộ nhớ** — hỏi agent trong phiên mới:
+```
+What are our commit message conventions?
+```
+Agent tự kiểm tra file memory và trả lời với thông tin đã lưu.
+
+> References đến memory files trong phản hồi của agent là liên kết clickable — nhấn để mở trực tiếp nội dung file.
+
+---
+
+### 🗃️ Quản lý file nhớ (Manage memory files)
+
+| Lệnh | Chức năng |
+|---|---|
+| `Chat: Show Memory Files` | Liệt kê và mở tất cả file memory theo từng scope |
+| `Chat: Clear All Memory Files` | Xóa toàn bộ memory cục bộ |
+
+> ⚠️ Xóa file memory riêng lẻ chưa được hỗ trợ. Để xóa một mục cụ thể, hãy yêu cầu agent cập nhật file đó hoặc dùng `Clear All`.
+
+---
+
+### ☁️ Copilot Memory (GitHub-hosted)
+
+Copilot Memory là hệ thống bộ nhớ GitHub-hosted cho phép Copilot **học và lưu giữ insights về repository** theo thời gian, chia sẻ kiến thức giữa các Copilot agents.
+
+**Đặc điểm nổi bật:**
+- 🔗 **Repository-scoped:** memories gắn với repo cụ thể; chỉ contributors có quyền write mới có thể tạo.
+- 🤝 **Cross-agent sharing:** insight từ Copilot code review có thể hướng dẫn Copilot coding agent và ngược lại.
+- ✅ **Được xác minh trước khi dùng:** agents kiểm tra memories so với codebase hiện tại để tránh thông tin lỗi thời.
+- ⏳ **Tự động hết hạn:** memories bị xóa sau ~28 ngày.
+
+**Kích hoạt:**
+1. Bật Copilot Memory trong [GitHub Copilot settings](https://github.com/settings/copilot).
+2. Bật tích hợp trong VS Code: `github.copilot.chat.copilotMemory.enabled = true`.
+3. Repository owners có thể xem/quản lý memories tại *Repository Settings → Copilot → Memory*.
+
+---
+
+### ✅ Thực hành tốt (Best practices)
+
+| Tình huống | Dùng scope nào |
+|---|---|
+| Sở thích cá nhân, code style | **User** |
+| Kiến trúc, convention, lệnh build dự án | **Repository** |
+| Kế hoạch / ghi chú đang thực hiện | **Session** |
+| Chia sẻ kiến thức giữa Copilot agents | **Copilot Memory** |
+
+- 📤 **Xuất kết quả quan trọng:** Session memory bị xóa sau phiên — lưu kế hoạch vào file dự án nếu cần giữ lâu dài.
+- 🔍 **Verify trước khi áp dụng:** luôn review thay đổi do agent tạo ra dựa trên memory.
+- 🔒 **Bảo mật:** không lưu secrets hoặc dữ liệu nhạy cảm vào memory; Copilot Memory chia sẻ rộng hơn và cần bật có chủ ý.
+
+---
+
+### 🔗 Tài nguyên (Resources)
+
+| Chủ đề | Link |
+|---|---|
+| Memory (official) | <https://code.visualstudio.com/docs/copilot/agents/memory> |
+| Copilot Memory (GitHub) | <https://docs.github.com/copilot/how-tos/use-copilot-agents/copilot-memory> |
+| Planning with agents | <https://code.visualstudio.com/docs/copilot/agents/planning> |
+
