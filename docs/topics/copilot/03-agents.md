@@ -26,6 +26,12 @@ mode: short
   - [✳️ Đặc điểm chính](#️-đặc-điểm-chính)
   - [🚀 Bắt đầu nhanh (Get started)](#-bắt-đầu-nhanh-get-started)
   - [⚠️ Lưu ý / Quyền truy cập](#️-lưu-ý--quyền-truy-cập)
+- [🧰 Copilot CLI (Copilot CLI)](#-copilot-cli-copilot-cli)
+  - [🔹 Isolation modes](#-isolation-modes)
+  - [🔹 Tạo phiên (Create a session)](#-tạo-phiên-create-a-session)
+  - [🔹 Dùng từ terminal (Use from terminal)](#-dùng-từ-terminal-use-from-terminal)
+  - [🔹 Hand off từ local agent](#-hand-off-từ-local-agent)
+  - [🔹 Hạn chế (Limitations)](#-hạn-chế-limitations)
   - [✅ Thực hành tốt (Best practices)](#-thực-hành-tốt-best-practices)
 - [🔗 Tài nguyên (Resources)](#-tài-nguyên-resources)
 <!-- TOC end -->
@@ -249,6 +255,38 @@ Synthesize findings into a prioritized summary after all subagents complete.
 - Nếu không thấy tùy chọn agent, kiểm tra setting `chat.agent.enabled` hoặc chính sách tổ chức.
 - Agent có thể thay đổi file trực tiếp — luôn review các gợi ý và edits; VS Code cung cấp overlay để xem và áp dụng thay đổi có chọn lọc.
 - `Edit mode` đã deprecated; dùng Agent mode cho multi-file edits.
+
+---
+
+## 🧰 Copilot CLI (Copilot CLI)
+
+> Copilot CLI cho phép chạy các phiên agent nền (background) trên máy local, quản lý và giám sát chúng từ Chat view trong VS Code, hoặc trực tiếp từ terminal qua profile `GitHub Copilot CLI`.
+
+### 🔹 Isolation modes
+
+- **Worktree isolation:** Tạo Git worktree riêng cho mỗi phiên, thay đổi được áp dụng vào worktree và không ảnh hưởng workspace chính cho tới khi bạn review/apply.
+- **Workspace isolation:** Thay đổi được áp dụng trực tiếp vào workspace hiện tại.
+
+### 🔹 Tạo phiên (Create a session)
+
+1. Mở Chat view → chọn **New Copilot CLI Session** hoặc dùng `Chat: New Copilot CLI Session` từ Command Palette.
+2. Chọn isolation mode (worktree / workspace), thêm context hoặc chọn model/custom agent tuỳ ý.
+3. Gửi prompt để bắt đầu; theo dõi tiến độ trong Chat view.
+
+### 🔹 Dùng từ terminal (Use from terminal)
+
+- VS Code đăng ký profile terminal `GitHub Copilot CLI`; bạn có thể mở terminal này hoặc gõ `copilot` để bắt đầu.
+- Phiên bắt đầu trong terminal sẽ xuất hiện trong danh sách sessions của Chat view; có thể resume, gửi prompt, hoặc review kết quả cả từ terminal lẫn Chat view.
+
+### 🔹 Hand off từ local agent
+
+- Có thể chuyển tiếp một conversation từ local agent sang Copilot CLI (ví dụ: sau khi Plan agent tạo plan). Toàn bộ conversation history sẽ được chuyển sang phiên CLI khi hand off.
+
+### 🔹 Hạn chế (Limitations)
+
+- Không truy cập tất cả built-in tools hoặc extension-provided tools; chỉ có các tools/mô hình sẵn có cho CLI.
+- Chỉ truy cập local MCP servers không yêu cầu authentication.
+- Worktree isolation yêu cầu workspace là Git repository để tạo worktrees.
 
 ---
 
