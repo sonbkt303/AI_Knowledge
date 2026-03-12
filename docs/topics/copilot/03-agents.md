@@ -22,6 +22,10 @@ mode: short
   - [🧭 Mẫu tổ chức (Orchestration patterns)](#-mẫu-tổ-chức-orchestration-patterns)
     - [Coordinator / Worker pattern](#coordinator--worker-pattern)
     - [Multi-perspective code review](#multi-perspective-code-review)
+- [🏠 Local agents (Local agents)](#-local-agents-local-agents)
+  - [✳️ Đặc điểm chính](#️-đặc-điểm-chính)
+  - [🚀 Bắt đầu nhanh (Get started)](#-bắt-đầu-nhanh-get-started)
+  - [⚠️ Lưu ý / Quyền truy cập](#️-lưu-ý--quyền-truy-cập)
   - [✅ Thực hành tốt (Best practices)](#-thực-hành-tốt-best-practices)
 - [🔗 Tài nguyên (Resources)](#-tài-nguyên-resources)
 <!-- TOC end -->
@@ -217,6 +221,34 @@ Synthesize findings into a prioritized summary after all subagents complete.
 ```
 
 > 💡 Mỗi subagent tiếp cận code độc lập → kết quả không bị ảnh hưởng lẫn nhau, phát hiện lỗi khách quan hơn.
+
+---
+
+## 🏠 Local agents (Local agents)
+
+> Local agents chạy trực tiếp trong Visual Studio Code trên máy của bạn, hoạt động trên workspace hiện tại và có quyền truy cập đầy đủ tới file, extension-provided tools, MCP servers và các mô hình đã cấu hình (bao gồm BYOK). Thích hợp cho tác vụ tương tác, cần ngữ cảnh dev (lint, test, stack traces) hoặc khi cần sử dụng công cụ cục bộ.
+
+### ✳️ Đặc điểm chính
+
+- Chạy trên máy local, có full access vào workspace và tools do extensions/MCP cung cấp.
+- Giao diện chat tương tác — hỗ trợ phản hồi tức thì và gửi/queue messages trong phiên.
+- Có thể sử dụng mọi model đã cấu hình trong VS Code (ví dụ BYOK hoặc các provider khác).
+- Bao gồm các built-in agents: `Agent`, `Plan`, `Ask` — mỗi loại tối ưu cho workflow khác nhau.
+
+### 🚀 Bắt đầu nhanh (Get started)
+
+1. Mở Chat view → chọn agent từ agent picker (Agent / Plan / Ask).
+2. Viết prompt cao cấp (ví dụ: "Implement a user authentication system with OAuth2 and JWT") và gửi.
+3. Bật các tools cần thiết trong tools picker (read, search, edit, v.v.).
+4. Review và xác nhận các code changes / tool invocations khi agent thực hiện.
+
+> 💡 Tip: Dùng `Ask` để tra cứu trong codebase; `Plan` để chia nhỏ nhiệm vụ; `Agent` để sửa nhiều file tự động (luôn review các edits trước khi apply).
+
+### ⚠️ Lưu ý / Quyền truy cập
+
+- Nếu không thấy tùy chọn agent, kiểm tra setting `chat.agent.enabled` hoặc chính sách tổ chức.
+- Agent có thể thay đổi file trực tiếp — luôn review các gợi ý và edits; VS Code cung cấp overlay để xem và áp dụng thay đổi có chọn lọc.
+- `Edit mode` đã deprecated; dùng Agent mode cho multi-file edits.
 
 ---
 
