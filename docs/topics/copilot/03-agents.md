@@ -32,6 +32,12 @@ mode: short
   - [🔹 Dùng từ terminal (Use from terminal)](#-dùng-từ-terminal-use-from-terminal)
   - [🔹 Hand off từ local agent](#-hand-off-từ-local-agent)
   - [🔹 Hạn chế (Limitations)](#-hạn-chế-limitations)
+- [☁️ Cloud agents (Cloud agents)](#️-cloud-agents-cloud-agents)
+  - [🔸 What are cloud agents?](#-what-are-cloud-agents)
+  - [🔸 Start a cloud agent session](#-start-a-cloud-agent-session)
+  - [🔸 View and manage sessions](#-view-and-manage-sessions)
+  - [🔸 Hand off to cloud agent](#-hand-off-to-cloud-agent)
+  - [🔸 Limitations](#-limitations)
   - [✅ Thực hành tốt (Best practices)](#-thực-hành-tốt-best-practices)
 - [🔗 Tài nguyên (Resources)](#-tài-nguyên-resources)
 <!-- TOC end -->
@@ -287,6 +293,39 @@ Synthesize findings into a prioritized summary after all subagents complete.
 - Không truy cập tất cả built-in tools hoặc extension-provided tools; chỉ có các tools/mô hình sẵn có cho CLI.
 - Chỉ truy cập local MCP servers không yêu cầu authentication.
 - Worktree isolation yêu cầu workspace là Git repository để tạo worktrees.
+
+---
+
+## ☁️ Cloud agents (Cloud agents)
+
+> Cloud agents chạy trên hạ tầng đám mây (ví dụ GitHub Copilot coding agent) và phù hợp cho các tác vụ có scope rõ ràng, cần thực thi tự động bằng tài nguyên remote (ví dụ tạo pull request, refactor quy mô lớn, implement feature hoàn chỉnh).
+
+### 🔸 What are cloud agents?
+
+- Chạy trên remote infrastructure, không trực tiếp truy cập VS Code built-in runtime context (failed tests, text selection), nhưng tích hợp với MCP servers và mô hình cloud.
+- Ví dụ: **GitHub Copilot coding agent** — hỗ trợ refactor lớn, implement feature từ yêu cầu cao cấp, tự tạo pull request và tích hợp review.
+- Hỗ trợ cả third-party cloud agents (Claude, Codex) nếu bật trong Copilot account settings.
+
+### 🔸 Start a cloud agent session
+
+1. Mở Chat view → chọn **New Chat** → chọn session type **Cloud**, hoặc chạy `Chat: New Cloud Agent` từ Command Palette.
+2. Chọn provider cloud agent, model hoặc custom agent nếu cần.
+3. Gửi prompt; session chạy trên cloud và tiến độ được hiển thị trong Chat view.
+
+### 🔸 View and manage sessions
+
+- Lọc danh sách session theo Cloud Agents trong Chat view để xem các phiên đám mây.
+- Mở session để xem chi tiết; có thể open as Editor để xem trong tab riêng.
+
+### 🔸 Hand off to cloud agent
+
+- Hand off từ local/background agent: mở session local → chọn Cloud trong session type dropdown để tiếp tục bằng cloud agent.
+- Với background sessions: dùng `/delegate` để gửi toàn bộ chat history tới cloud agent.
+
+### 🔸 Limitations
+
+- Cloud agents không có quyền truy cập runtime context trực tiếp; giới hạn tool access phụ thuộc vào provider.
+- Cần bật third-party providers trong Copilot account để dùng các cloud agents bên thứ ba.
 
 ---
 
