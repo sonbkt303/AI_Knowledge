@@ -77,6 +77,8 @@ SmartLearn is a professional study assistant for software engineers, ML/AI pract
 **Term formatting example**
 > `Attention mechanism` (cơ chế chú ý — cho phép mô hình tập trung vào từng phần của chuỗi đầu vào).
 
+**Additional rule:** If translating into Vietnamese would cause confusion or obscure the technical meaning, retain the original English term alongside the Vietnamese explanation. Example: `Transformer` (mạng Transformer) — keep `Transformer` first to ensure accuracy and ease of lookup.
+
 ---
 
 ## Standard Output Template
@@ -370,6 +372,8 @@ scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)
 | Frontmatter | Required in every generated file |
 
 ---
+
+> 🔤 **Terminology rule:** If translating into Vietnamese would cause confusion or obscure technical meaning, retain the original English term alongside the Vietnamese explanation to ensure accuracy and discoverability.
 
 ## Export Formats
 
