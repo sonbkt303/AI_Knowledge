@@ -16,17 +16,17 @@ mode: medium
     - [Thêm ngữ cảnh vào prompt](#thêm-ngữ-cảnh-vào-prompt)
     - [Review \& quản lý thay đổi](#review--quản-lý-thay-đổi)
     - [Tối ưu phản hồi](#tối-ưu-phản-hồi)
+    - [💻 Ví dụ](#-ví-dụ)
+    - [⚠️ Lưu ý / Hạn chế](#️-lưu-ý--hạn-chế)
+    - [🚀 3 Bước tiếp theo](#-3-bước-tiếp-theo)
+    - [🗺️ Sơ đồ](#️-sơ-đồ)
   - [🗂️ Quản lý ngữ cảnh cho AI](#️-quản-lý-ngữ-cảnh-cho-ai)
     - [#-mentions — Tham chiếu file, symbol, công cụ](#-mentions--tham-chiếu-file-symbol-công-cụ)
     - [@-mentions — Chat participants](#-mentions--chat-participants)
     - [Vision — Đính kèm ảnh](#vision--đính-kèm-ảnh)
     - [Browser elements — Phần tử trình duyệt](#browser-elements--phần-tử-trình-duyệt)
     - [Theo dõi \& thu gọn context window](#theo-dõi--thu-gọn-context-window)
-  - [💻 Ví dụ](#-ví-dụ)
-  - [⚠️ Lưu ý / Hạn chế](#️-lưu-ý--hạn-chế)
-  - [🚀 3 Bước tiếp theo](#-3-bước-tiếp-theo)
-  - [🗺️ Sơ đồ](#️-sơ-đồ)
-  - [🔗 Nguồn](#-nguồn)
+  - [Nguồn](#nguồn)
 <!-- TOC end -->
 
 ## Copilot Chat
@@ -127,6 +127,43 @@ Cung cấp ngữ cảnh đúng giúp AI sinh ra kết quả chính xác và liê
 
 > 📌 **Tóm tắt:** Ba quyết định định hình mỗi phiên chat — *nơi chạy*, *loại agent*, và *mô hình* — quyết định phạm vi tự chủ và chất lượng đầu ra của AI.
 
+#### 💻 Ví dụ
+
+```text
+Prompt: Create a basic calculator app with HTML, CSS, and JavaScript
+```
+> 💡 Agent tự tạo file HTML/CSS/JS, áp dụng thay đổi workspace. Mở `Chat view` (Ctrl+Alt+I) → chọn agent **Agent** → nhập prompt → Enter → Review diffs → **Keep** hoặc **Undo**.
+
+#### ⚠️ Lưu ý / Hạn chế
+
+- ❌ **Không chấp nhận mù quáng:** AI có thể sinh code không chính xác hoặc chứa lỗi bảo mật — luôn review trước khi merge.
+- ⚠️ **Model thay đổi theo subscription:** Danh sách model khả dụng có thể cập nhật theo thời gian.
+- ⚠️ **Tính năng experimental:** Message queuing/steering, Autopilot và Browser elements vẫn đang thử nghiệm.
+- ⚠️ **Thận trọng với Autopilot:** Chỉ dùng với tác vụ đã xác định rõ và môi trường an toàn.
+
+#### 🚀 3 Bước tiếp theo
+
+1. Mở `Chat view` (Ctrl+Alt+I), thử prompt mẫu và review từng thay đổi bằng overlay controls.
+2. Thực hiện cùng tác vụ trên các session type khác nhau (Local → Background → Cloud).
+3. Tạo `prompt file` hoặc `custom instructions` để agent tự hiểu ngữ cảnh dự án.
+
+#### 🗺️ Sơ đồ
+
+<div align="center">
+
+```mermaid
+graph TD
+  U[Người dùng] --> M["Chat · Inline · Quick · CLI"]
+  M --> A["Agent / Plan / Ask"]
+  A --> W[Thay đổi Workspace]
+  W --> R{Review}
+  R --> K["Keep / Undo"]
+```
+
+*Hình 1: Luồng cơ bản của Copilot Chat — từ chọn bề mặt, agent đến review thay đổi.*
+
+</div>
+
 ---
 
 ### 🗂️ Quản lý ngữ cảnh cho AI
@@ -191,65 +228,7 @@ Agent cũng có thể tự điều hướng và tương tác với trang (click,
 
 ---
 
-### 💻 Ví dụ
-
-```text
-Prompt: Create a basic calculator app with HTML, CSS, and JavaScript
-```
-
-**Các bước thực hiện:**
-
-1. Nhấn Ctrl+Alt+I → mở **Chat view**.
-2. Chọn agent **Agent** từ agent picker.
-3. Nhập prompt trên → nhấn Enter.
-4. Agent tự tạo file HTML/CSS/JS, có thể chạy lệnh cài dependencies.
-5. Review diffs inline: nhấn **Keep** để giữ hoặc **Undo** để bỏ từng thay đổi.
-
-> 💡 **Giải thích:** Agent tự lên kế hoạch và thực hiện — luôn review kỹ từng thay đổi trước khi chấp nhận, đặc biệt với code liên quan đến bảo mật hoặc logic nghiệp vụ.
-
----
-
-### ⚠️ Lưu ý / Hạn chế
-
-- ❌ **Không chấp nhận mù quáng:** AI có thể sinh code không chính xác, chứa lỗi bảo mật hoặc vi phạm license — luôn review trước khi merge/deploy.
-- ⚠️ **Model và tính năng thay đổi theo thời gian:** Danh sách model khả dụng phụ thuộc vào Copilot subscription và có thể thay đổi.
-- ⚠️ **Tính năng experimental:** Message queuing/steering, Autopilot, và Browser elements vẫn đang trong giai đoạn thử nghiệm.
-- ⚠️ **Thận trọng với Autopilot:** Ở mức Autopilot, agent hoàn toàn tự động — chỉ dùng với tác vụ đã được xác định rõ và môi trường an toàn.
-
----
-
-### 🚀 3 Bước tiếp theo
-
-1. Mở `Chat view` (Ctrl+Alt+I), thử prompt mẫu và review từng thay đổi bằng overlay controls.
-2. Thực hiện cùng tác vụ trên các session type khác nhau (Local → Background → Cloud) để thấy sự khác biệt về hành vi và phạm vi tự chủ.
-3. Tạo `prompt file` hoặc `custom instructions` để agent tự hiểu ngữ cảnh dự án mà không cần nhắc lại mỗi session.
-
----
-
-### 🗺️ Sơ đồ
-
-<div align="center">
-
-```mermaid
-graph TD
-  U[Người dùng] --> M["Bề mặt truy cập<br/>Chat · Inline · Quick · CLI"]
-  M --> AP[Agent picker]
-  AP --> A["Agent<br/>Local · Background · Cloud"]
-  AP --> B[Plan]
-  AP --> C[Ask]
-  A --> W[Thay đổi Workspace]
-  W --> R{Review}
-  R --> K[Keep]
-  R --> X[Undo / Checkpoint]
-```
-
-*Hình 1: Luồng cơ bản của Copilot Chat — từ chọn bề mặt, agent đến review thay đổi.*
-
-</div>
-
----
-
-### 🔗 Nguồn
+###  Nguồn
 
 - Nguồn chính: https://code.visualstudio.com/docs/copilot/chat/copilot-chat
 - Quản lý chat sessions: https://code.visualstudio.com/docs/copilot/chat/chat-sessions
