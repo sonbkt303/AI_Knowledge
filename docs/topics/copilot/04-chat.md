@@ -16,6 +16,12 @@ mode: medium
     - [Thêm ngữ cảnh vào prompt](#thêm-ngữ-cảnh-vào-prompt)
     - [Review \& quản lý thay đổi](#review--quản-lý-thay-đổi)
     - [Tối ưu phản hồi](#tối-ưu-phản-hồi)
+  - [🗂️ Quản lý ngữ cảnh cho AI](#️-quản-lý-ngữ-cảnh-cho-ai)
+    - [#-mentions — Tham chiếu file, symbol, công cụ](#-mentions--tham-chiếu-file-symbol-công-cụ)
+    - [@-mentions — Chat participants](#-mentions--chat-participants)
+    - [Vision — Đính kèm ảnh](#vision--đính-kèm-ảnh)
+    - [Browser elements — Phần tử trình duyệt](#browser-elements--phần-tử-trình-duyệt)
+    - [Theo dõi \& thu gọn context window](#theo-dõi--thu-gọn-context-window)
   - [💻 Ví dụ](#-ví-dụ)
   - [⚠️ Lưu ý / Hạn chế](#️-lưu-ý--hạn-chế)
   - [🚀 3 Bước tiếp theo](#-3-bước-tiếp-theo)
@@ -120,6 +126,68 @@ Cung cấp ngữ cảnh đúng giúp AI sinh ra kết quả chính xác và liê
 - **Gỡ lỗi hội thoại:** Dùng **Agent Logs** và **Chat Debug view** để xem event log, system prompt, context và payloads — hữu ích khi AI phản hồi không như mong đợi.
 
 > 📌 **Tóm tắt:** Ba quyết định định hình mỗi phiên chat — *nơi chạy*, *loại agent*, và *mô hình* — quyết định phạm vi tự chủ và chất lượng đầu ra của AI.
+
+---
+
+### 🗂️ Quản lý ngữ cảnh cho AI
+
+> Cung cấp ngữ cảnh đúng giúp AI sinh ra kết quả chính xác và liên quan hơn. Copilot Chat hỗ trợ nhiều cơ chế để thêm context vào prompt.
+
+#### #-mentions — Tham chiếu file, symbol, công cụ
+
+Gõ `#` trong ô chat để gọi context picker. Các loại tham chiếu phổ biến:
+
+| Cú pháp | Tác dụng |
+|---|---|
+| `#file` | Đính kèm nội dung file cụ thể (full content hoặc outline nếu quá lớn) |
+| `#codebase` | Cho phép Copilot tự tìm kiếm file liên quan trong toàn bộ workspace |
+| `#terminalSelection` | Đưa output được chọn trong terminal vào context |
+| `#fetch <URL>` | Tải nội dung trang web cụ thể làm context (có cache, cần xác nhận URL) |
+| `#githubRepo <owner/repo>` | Tìm kiếm code trong một GitHub repository |
+
+> 💡 **Mẹo:** Khi dùng agent, Copilot tự thêm context cần thiết qua `#codebase`. Vẫn có thể thêm `#codebase` thủ công nếu câu hỏi có thể bị hiểu nhiều nghĩa.
+
+**Cách thêm file/folder vào context:**
+- Gõ `#` rồi nhập tên file/folder/symbol.
+- Drag & drop từ Explorer view, Search view hoặc editor tabs vào Chat view.
+- Nhấn **Add Context** → chọn **Files & Folders** hoặc **Symbols**.
+
+#### @-mentions — Chat participants
+
+Chat participants là các assistant chuyên biệt cho từng domain cụ thể. Gọi bằng `@` theo sau là tên participant:
+
+| Participant | Dùng khi |
+|---|---|
+| `@vscode` | Câu hỏi về tính năng, cài đặt của VS Code |
+| `@terminal` | Câu hỏi về lệnh terminal, shell scripting |
+
+> **Ví dụ:** `@vscode how to enable word wrapping` · `@terminal top 5 largest files`
+
+Extensions cũng có thể đóng góp thêm chat participants riêng.
+
+#### Vision — Đính kèm ảnh
+
+Copilot Chat hỗ trợ vision: đính kèm ảnh (screenshot, UI mockup, code chụp màn hình) làm context để đặt câu hỏi hoặc yêu cầu implement.
+
+> 💡 **Mẹo:** Có thể drag & drop ảnh từ trình duyệt web trực tiếp vào Chat view.
+
+#### Browser elements — Phần tử trình duyệt
+
+*(Experimental)* Chọn phần tử HTML/CSS từ integrated browser để thêm vào prompt:
+
+1. Chạy web app và mở integrated browser (`Browser: Open Integrated Browser`).
+2. Nhập URL cần tương tác.
+3. Nhấn **Add Element to Chat**, di chuột chọn phần tử cần thêm.
+
+Agent cũng có thể tự điều hướng và tương tác với trang (click, nhập text, chụp screenshot) khi bật `workbench.browser.enableChatTools = true`.
+
+#### Theo dõi & thu gọn context window
+
+- **Context window indicator:** thanh hiển thị % context đã dùng trong chat input box; hover để xem token count chi tiết (ví dụ: `15K/128K`).
+- **Automatic compaction:** khi context window đầy, VS Code tự tóm tắt các tin nhắn cũ để tiếp tục phiên mà không mất thông tin quan trọng.
+- **Manual compaction:** gõ `/compact` (kèm hướng dẫn tùy chọn, ví dụ `/compact focus on database schema`) hoặc nhấn **Compact Conversation** từ context window control.
+
+> 📌 **Tóm tắt:** Ngữ cảnh tốt = phản hồi tốt. Dùng `#codebase` để tìm tự động, `#file` để chỉ định cụ thể, và `/compact` để giữ session dài mà không mất mạch.
 
 ---
 
